@@ -4,8 +4,6 @@ import {
   SET_CHILDREN,
   ADD_SCHOOL,
   ADD_DRIVER,
-  // DELETE_SCHOOL,
-  // DELETE_BUS,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -41,16 +39,6 @@ const erkabReducer = (state = initialState, action) => {
         ...state,
         busses: [action.payload, ...state.busses],
       };
-    // case DELETE_SCHOOL:
-    //   return {
-    //     ...state,
-    //     schools: state.schools.filter((school) => school !== action.payload),
-    //   };
-    // case DELETE_BUS:
-    //   return {
-    //     ...state,
-    //     busses: state.busses.filter((bus) => bus !== action.payload),
-    //   };
     default:
       return state;
   }

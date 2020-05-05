@@ -6,6 +6,4 @@ export {
   fetchChildren,
   postSchool,
   addDriver,
-} from // deleteSchool,
-// deleteBus,
-"./erkab";
+} from "./erkab";
