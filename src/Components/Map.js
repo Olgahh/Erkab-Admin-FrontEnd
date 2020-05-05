@@ -1,5 +1,5 @@
 /* global google */
-import React from "react";
+import React, { Component } from "react";
 import {
   withGoogleMap,
   GoogleMap,
@@ -8,7 +8,7 @@ import {
   DirectionsRenderer,
 } from "react-google-maps";
 
-class MapDirectionsRenderer extends React.Component {
+class MapDirectionsRenderer extends Component {
   state = {
     directions: null,
     error: null,
@@ -45,8 +45,6 @@ class MapDirectionsRenderer extends React.Component {
   }
 
   render() {
-    console.log(this.state.directions);
-    console.log(this.state.error);
     if (this.state.error) {
       return <h1>{this.state.error}</h1>;
     }
