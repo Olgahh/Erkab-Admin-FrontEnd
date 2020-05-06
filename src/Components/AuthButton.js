@@ -2,29 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
-
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 const AuthButton = ({ user, logout }) => {
   return user ? (
     <>
       <li className="nav-item">
-        <span style={{ color: "#ffc107" }} className="nav-link">
+        <span
+          style={{ color: "#008db3", fontSize: "1.2rem" }}
+          className="nav-link"
+        >
           {user.username}
         </span>
       </li>
       <li className="nav-item">
         <span
-          style={{ color: "#ffc107" }}
+          style={{ color: "#008db3", fontSize: "1.2rem" }}
           className="nav-link"
           onClick={logout}
         >
-          Logout
+          <ExitToAppIcon color="#008db3" />
         </span>
       </li>
     </>
   ) : (
     <li key="loginButton" className="nav-item font-weight-bold">
       <Link
-        style={{ color: "#ffea32", fontSize: "1.2rem" }}
+        style={{ color: "#008db3", fontSize: "1.2rem" }}
         to="/"
         className="nav-link"
       >

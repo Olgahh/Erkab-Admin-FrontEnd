@@ -45,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: "#f7f7f7",
+    color: "#008db3",
   },
   drawerHeader: {
     display: "flex",
@@ -61,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+
     marginLeft: -drawerWidth,
-    backgroundColor: "grey",
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -110,7 +112,7 @@ export default function PersistentDrawerLeft() {
         classes={{
           paper: classes.drawerPaper,
         }}
-        color="light"
+        color="#008db3"
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
@@ -123,15 +125,19 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <div id="sidebar" className="text-center mt-5">
+          <div
+            id="sidebar"
+            className="text-center mt-5"
+            style={{ color: "#008db3" }}
+          >
             <section>
-              <SchoolIcon color="primary" />
+              <SchoolIcon color="#008db3" />
               <h4 className="menu-item active mb-5 ml-3 ">
                 <NavLink to="/add/school">Add School</NavLink>
               </h4>
             </section>
             <section>
-              <DirectionsBusIcon color="primary" />
+              <DirectionsBusIcon color="#008db3" />
               <h4 className="menu-item active mb-5 ml-3">
                 <NavLink to="/add/driver">Add Driver</NavLink>
               </h4>

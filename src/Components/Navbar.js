@@ -20,7 +20,7 @@ class NavBar extends Component {
             <Nav className="mx-auto">
               <span
                 className="nav-item nav-link font-weight-bold"
-                style={{ color: "#ffea32", fontSize: "1.2rem" }}
+                style={{ color: "#008db3", fontSize: "1.5rem" }}
               >
                 Admin Page
               </span>
