@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { fetchBusses, fetchChildren, fetchRoute } from "../store/actions";
 
 import BusList from "./BusList";
-import ChildList from "./ChildList";
+import ChildRow from "./ChildRow";
 import Map from "./Map";
 
 const googleMapsApiKey = "AIzaSyB1bZjRb_ke0TJH76V-UYzX4tyEZ5d9J4Y";
@@ -38,8 +38,8 @@ class School extends Component {
     const busLists = this.props.busses.map((bus) => (
       <BusList key={bus.driver_name + bus.id} bus={bus} />
     ));
-    const childLists = this.props.children.map((child) => (
-      <ChildList key={child.name + child.id} child={child} />
+    const childRows = this.props.children.map((child) => (
+      <ChildRow key={child.name + child.id} child={child} />
     ));
     if (!this.props.user) return <Redirect to="/" />;
     return (
@@ -47,20 +47,34 @@ class School extends Component {
         <div className="container mt-5">
           <div className="image">
             <h3 style={{ color: "black" }}>Busses</h3>
-            <hr />
-            <div className="row mx-4">{busLists}</div>
+            <table className="mt-3 table ">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>{busLists}</tbody>
+            </table>
           </div>
 
           <div className="image ml-5">
             <h3 style={{ color: "black" }}>Children</h3>
-            <hr />
-            <div className="row mx-4">{childLists}</div>
+
+            <table className="mt-3 table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date of Birth</th>
+                </tr>
+              </thead>
+              <tbody>{childRows}</tbody>
+            </table>
           </div>
         </div>
-        <h2>Routes:</h2>
+        <h2 className="display-3">Routes:</h2>
         {this.props.route.map((route) => (
           <div>
-            <h3>Driver Name : {route.bus}</h3>
+            <h3 className="display-5">Driver Name: {route.bus}</h3>
             <Map
               googleMapURL={
                 "https://maps.googleapis.com/maps/api/js?key=" +

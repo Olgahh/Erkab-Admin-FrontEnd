@@ -15,12 +15,9 @@ const SchoolCard = ({ school, deleteSchool }) => {
         </div>
       </Link>
       <div className="card-body">
-        <h5 className="card-title">
+        <h5 className="card-title display-5 text-center">
           <span>{school.name}</span>
         </h5>
-        <small className="card-text">
-          Location: {school.lat + "," + school.lng}
-        </small>
       </div>
     </div>
   );
