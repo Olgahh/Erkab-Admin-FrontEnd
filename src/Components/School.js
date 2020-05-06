@@ -7,7 +7,7 @@ import BusList from "./BusList";
 import ChildList from "./ChildList";
 import Map from "./Map";
 
-const googleMapsApiKey = "AIzaSyCDsy5bYBcHMfJR7irP9MkYPbiiuoCfkec";
+const googleMapsApiKey = "AIzaSyB1bZjRb_ke0TJH76V-UYzX4tyEZ5d9J4Y";
 
 class School extends Component {
   componentDidMount() {

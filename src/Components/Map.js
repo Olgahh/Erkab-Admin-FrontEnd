@@ -1,23 +1,23 @@
 /* global google */
-import React, { Component } from "react";
+import React from "react";
 import {
   withGoogleMap,
   GoogleMap,
   withScriptjs,
-  Marker,
+  // Marker,
   DirectionsRenderer,
 } from "react-google-maps";
 
-class MapDirectionsRenderer extends Component {
+class MapDirectionsRenderer extends React.Component {
   state = {
     directions: null,
     error: null,
   };
 
   componentDidMount() {
-    const { places, travelMode } = this.props;
+    const { locations, travelMode } = this.props;
 
-    const waypoints = places.map((p) => ({
+    const waypoints = locations.map((p) => ({
       location: { lat: p.latitude, lng: p.longitude },
       stopover: true,
     }));
@@ -62,12 +62,12 @@ const Map = withScriptjs(
       defaultCenter={props.defaultCenter}
       defaultZoom={props.defaultZoom}
     >
-      {props.markers.map((marker, index) => {
+      {/* {props.markers.map((marker, index) => {
         const position = { lat: marker.latitude, lng: marker.longitude };
         return <Marker key={index} position={position} />;
-      })}
+      })} */}
       <MapDirectionsRenderer
-        places={props.markers}
+        locations={props.markers}
         travelMode={google.maps.TravelMode.DRIVING}
       />
     </GoogleMap>
