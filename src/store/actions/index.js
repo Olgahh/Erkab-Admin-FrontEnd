@@ -6,4 +6,5 @@ export {
   fetchChildren,
   postSchool,
   addDriver,
+  fetchRoute,
 } from "./erkab";

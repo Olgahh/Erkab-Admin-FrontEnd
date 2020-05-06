@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchBusses, fetchChildren } from "../store/actions";
+import { Redirect } from "react-router-dom";
+import { fetchBusses, fetchChildren, fetchRoute } from "../store/actions";
+
 import BusList from "./BusList";
 import ChildList from "./ChildList";
-import { Redirect } from "react-router-dom";
+import Map from "./Map";
 
-class Bus extends Component {
+const googleMapsApiKey = "AIzaSyCDsy5bYBcHMfJR7irP9MkYPbiiuoCfkec";
+
+class School extends Component {
   componentDidMount() {
     const schoolID = this.props.match.params.schoolID;
     this.props.fetchBusses(schoolID);
     this.props.fetchChildren(schoolID);
+    this.props.fetchRoute(schoolID);
   }
 
   componentDidUpdate(prevProps) {
@@ -17,10 +22,19 @@ class Bus extends Component {
     if (schoolID !== prevProps.match.params.schoolID) {
       this.props.fetchBusses(schoolID);
       this.props.fetchChildren(schoolID);
+      this.props.fetchRoute(schoolID);
     }
   }
 
   render() {
+    const {
+      loadingElement,
+      containerElement,
+      mapElement,
+      defaultCenter,
+      defaultZoom,
+    } = this.props;
+
     const busLists = this.props.busses.map((bus) => (
       <BusList key={bus.driver_name + bus.id} bus={bus} />
     ));
@@ -43,6 +57,34 @@ class Bus extends Component {
             <div className="row mx-4">{childLists}</div>
           </div>
         </div>
+        <h2>Routes:</h2>
+        {this.props.route.map((route) => (
+          <div>
+            <h3>Driver Name : {route.bus}</h3>
+            <Map
+              googleMapURL={
+                "https://maps.googleapis.com/maps/api/js?key=" +
+                googleMapsApiKey +
+                "&libraries=geometry,drawing,places"
+              }
+              markers={route.path}
+              loadingElement={
+                loadingElement || <div style={{ height: `100%` }} />
+              }
+              containerElement={
+                containerElement || <div style={{ height: "80vh" }} />
+              }
+              mapElement={mapElement || <div style={{ height: `100%` }} />}
+              defaultCenter={
+                defaultCenter || {
+                  lat: 31.958497543606498,
+                  lng: 35.90563976171877,
+                }
+              }
+              defaultZoom={defaultZoom || 11}
+            />
+          </div>
+        ))}
       </div>
     );
   }
@@ -51,14 +93,16 @@ const mapStateToProps = (state) => {
   return {
     busses: state.erkab.busses,
     children: state.erkab.children,
+    route: state.erkab.route,
     user: state.user,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchRoute: (schoolID) => dispatch(fetchRoute(schoolID)),
     fetchBusses: (schoolID) => dispatch(fetchBusses(schoolID)),
     fetchChildren: (schoolID) => dispatch(fetchChildren(schoolID)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bus);
+export default connect(mapStateToProps, mapDispatchToProps)(School);

@@ -4,6 +4,7 @@ import {
   SET_CHILDREN,
   ADD_SCHOOL,
   ADD_DRIVER,
+  GET_ROUTE,
 } from "./actionTypes";
 
 import instance from "./instance";
@@ -41,6 +42,19 @@ export const fetchChildren = (schoolID) => async (dispatch) => {
     dispatch({
       type: SET_CHILDREN,
       payload: children,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchRoute = (schoolID) => async (dispatch) => {
+  try {
+    const res = await instance.get(`/routes/${schoolID}/`);
+    const route = res.data;
+    dispatch({
+      type: GET_ROUTE,
+      payload: route,
     });
   } catch (error) {
     console.error(error);
